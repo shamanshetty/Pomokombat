@@ -1,0 +1,352 @@
+.game-screen {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+.countdown-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: countdownPulse 1s ease-in-out;
+}
+
+.countdown-number {
+  font-size: 8rem;
+  font-weight: 900;
+  color: var(--tekken-gold);
+  text-shadow: 0 0 50px var(--tekken-gold);
+  animation: countdownScale 1s ease-out;
+  font-family: 'Russo One', monospace;
+}
+
+.countdown-text {
+  font-size: 2rem;
+  color: var(--tekken-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-top: 1rem;
+  animation: countdownFade 1s ease-out;
+  font-family: 'Russo One', monospace;
+}
+
+@keyframes countdownPulse {
+  0% { background: rgba(0, 0, 0, 0); }
+  100% { background: rgba(0, 0, 0, 0.9); }
+}
+
+@keyframes countdownScale {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes countdownFade {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.game-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--tekken-gold);
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  backdrop-filter: blur(15px);
+  box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+.round-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.round-label {
+  font-size: 0.8rem;
+  color: var(--tekken-purple);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.round-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--tekken-gold);
+}
+
+.current-mission {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--tekken-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.quit-btn {
+  background: transparent;
+  border: 2px solid var(--tekken-red);
+  color: var(--tekken-red);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-family: 'Russo One', monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.quit-btn:hover {
+  background: var(--tekken-red);
+  color: var(--dark-bg);
+  box-shadow: 0 0 15px var(--tekken-red);
+  transform: scale(1.05);
+}
+
+.battle-arena {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  align-items: center;
+  background: 
+    radial-gradient(circle at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%),
+    linear-gradient(45deg, transparent 24%, rgba(155, 89, 182, 0.05) 25%, rgba(155, 89, 182, 0.05) 26%, transparent 27%);
+  border: 2px solid var(--tekken-purple);
+  border-radius: 16px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 30px rgba(255, 215, 0, 0.1);
+}
+
+.battle-arena::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  animation: tekkenBattleScan 2s linear infinite;
+}
+
+@keyframes tekkenBattleScan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.fighter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-fighter {
+  align-items: flex-start;
+}
+
+.villain-fighter {
+  align-items: flex-end;
+}
+
+.fighter-avatar {
+  font-size: 4rem;
+  filter: drop-shadow(0 0 20px currentColor);
+  animation: tekkenFighterBounce 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes tekkenFighterBounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-15px); }
+}
+
+.hero-fighter .fighter-avatar {
+  animation-delay: 0s;
+}
+
+.villain-fighter .fighter-avatar {
+  animation-delay: 1s;
+}
+
+.fighter-name {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tekken-gold);
+  text-align: center;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.vs-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.battle-status {
+  background: rgba(30, 144, 255, 0.1);
+  border: 2px solid var(--tekken-blue);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: inset 0 0 15px rgba(30, 144, 255, 0.1);
+}
+
+.status-text {
+  font-size: 1.1rem;
+  color: var(--tekken-blue);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.victory-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.victory-content {
+  text-align: center;
+  background: rgba(255, 215, 0, 0.1);
+  border: 3px solid var(--tekken-gold);
+  border-radius: 20px;
+  padding: 3rem;
+  animation: tekkenVictoryPulse 1.5s ease-in-out infinite alternate;
+  box-shadow: inset 0 0 30px rgba(255, 215, 0, 0.2);
+}
+
+@keyframes tekkenVictoryPulse {
+  0% { 
+    box-shadow: 0 0 30px var(--tekken-gold);
+    transform: scale(1);
+  }
+  100% { 
+    box-shadow: 0 0 50px var(--tekken-gold), 0 0 70px var(--tekken-blue);
+    transform: scale(1.02);
+  }
+}
+
+.victory-title {
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--tekken-gold);
+  text-shadow: 0 0 30px var(--tekken-gold);
+  margin-bottom: 1rem;
+  animation: tekkenVictoryGlow 1s ease-in-out infinite alternate;
+  font-family: 'Russo One', monospace;
+}
+
+@keyframes tekkenVictoryGlow {
+  0% { text-shadow: 0 0 30px var(--tekken-gold); }
+  100% { text-shadow: 0 0 50px var(--tekken-gold), 0 0 70px var(--tekken-blue); }
+}
+
+.victory-hero {
+  font-size: 6rem;
+  margin: 1rem 0;
+  filter: drop-shadow(0 0 30px currentColor);
+  animation: tekkenVictoryBounce 1s ease-in-out infinite;
+}
+
+@keyframes tekkenVictoryBounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-20px) rotate(-5deg); }
+  75% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.victory-message {
+  font-size: 1.2rem;
+  color: var(--tekken-blue);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.victory-btn {
+  background: linear-gradient(45deg, var(--tekken-green), var(--tekken-gold));
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  font-family: 'Russo One', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--dark-bg);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+
+.victory-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px var(--tekken-green);
+}
+
+@media (max-width: 968px) {
+  .battle-arena {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .game-header {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .hero-fighter, .villain-fighter {
+    align-items: center;
+  }
+  
+  .victory-title {
+    font-size: 3rem;
+  }
+  
+  .victory-hero {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown-number {
+    font-size: 6rem;
+  }
+  
+  .countdown-text {
+    font-size: 1.5rem;
+  }
+  
+  .fighter-avatar {
+    font-size: 3rem;
+  }
+  
+  .victory-content {
+    padding: 2rem;
+  }
+  
+  .victory-title {
+    font-size: 2.5rem;
+  }
+}

@@ -1,0 +1,174 @@
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 16px;
+  border: 2px solid var(--tekken-gold);
+  backdrop-filter: blur(15px);
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+.timer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, var(--tekken-gold), var(--tekken-red), var(--tekken-blue), var(--tekken-gold));
+  opacity: 0.1;
+  animation: tekkenTimerGlow 3s linear infinite;
+}
+
+@keyframes tekkenTimerGlow {
+  0% { opacity: 0.1; }
+  50% { opacity: 0.2; }
+  100% { opacity: 0.1; }
+}
+
+.work-timer {
+  border-color: var(--tekken-gold);
+}
+
+.break-timer {
+  border-color: var(--tekken-green);
+}
+
+.break-timer::before {
+  background: linear-gradient(45deg, var(--tekken-green), var(--tekken-gold), var(--tekken-blue), var(--tekken-green));
+}
+
+.timer-display {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.timer-time {
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--tekken-gold);
+  text-shadow: 0 0 30px var(--tekken-gold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+  animation: tekkenTimerPulse 1.5s ease-in-out infinite alternate;
+  font-family: 'Russo One', monospace;
+}
+
+@keyframes tekkenTimerPulse {
+  0% { text-shadow: 0 0 30px var(--tekken-gold); }
+  100% { text-shadow: 0 0 40px var(--tekken-gold), 0 0 60px var(--tekken-red); }
+}
+
+.break-timer .timer-time {
+  color: var(--tekken-green);
+  text-shadow: 0 0 30px var(--tekken-green);
+}
+
+.break-timer .timer-time {
+  animation: tekkenBreakTimerPulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes tekkenBreakTimerPulse {
+  0% { text-shadow: 0 0 30px var(--tekken-green); }
+  100% { text-shadow: 0 0 40px var(--tekken-green), 0 0 60px var(--tekken-gold); }
+}
+
+.timer-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--tekken-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+}
+
+.break-timer .timer-label {
+  color: var(--tekken-green);
+}
+
+.timer-progress {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  border: 1px solid var(--tekken-gold);
+}
+
+.break-timer .timer-progress {
+  border-color: var(--tekken-green);
+}
+
+.timer-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--tekken-gold), var(--tekken-blue));
+  border-radius: 4px;
+  transition: width 1s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.break-timer .timer-progress-fill {
+  background: linear-gradient(90deg, var(--tekken-green), var(--tekken-gold));
+}
+
+.timer-progress-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: tekkenProgressShine 1.5s linear infinite;
+}
+
+@keyframes tekkenProgressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.pause-btn {
+  background: transparent;
+  border: 2px solid var(--tekken-blue);
+  color: var(--tekken-blue);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-family: 'Russo One', monospace;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 1;
+}
+
+.pause-btn:hover:not(:disabled) {
+  background: var(--tekken-blue);
+  color: var(--dark-bg);
+  box-shadow: 0 0 20px var(--tekken-blue);
+  transform: scale(1.05);
+}
+
+.pause-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .timer {
+    padding: 1.5rem;
+  }
+  
+  .timer-time {
+    font-size: 3rem;
+  }
+  
+  .timer-label {
+    font-size: 0.9rem;
+  }
+}

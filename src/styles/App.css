@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Russo+One&display=swap');
+
+:root {
+  --tekken-gold: #FFD700;
+  --tekken-red: #DC143C;
+  --tekken-blue: #1E90FF;
+  --tekken-purple: #9B59B6;
+  --tekken-orange: #FF6B35;
+  --tekken-green: #00FF7F;
+  --tekken-pink: #FF1493;
+  --dark-bg: #000011;
+  --darker-bg: #000008;
+  --grid-color: #001122;
+  --metal-silver: #C0C0C0;
+  --metal-gold: #B8860B;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Russo One', 'Orbitron', monospace;
+  background: var(--dark-bg);
+  color: var(--tekken-gold);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  position: relative;
+  background: 
+    radial-gradient(circle at 25% 25%, var(--grid-color) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(45deg, var(--darker-bg) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--darker-bg) 25%, transparent 25%);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px, 0 0, 0 0;
+}
+
+.arcade-border {
+  position: fixed;
+  background: linear-gradient(90deg, var(--tekken-gold), var(--tekken-red), var(--tekken-blue), var(--tekken-gold));
+  z-index: 1000;
+  animation: tekkenBorderGlow 2s ease-in-out infinite alternate;
+}
+
+.arcade-border.top, .arcade-border.bottom {
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.arcade-border.top { top: 0; }
+.arcade-border.bottom { bottom: 0; }
+
+.arcade-border.left, .arcade-border.right {
+  top: 0;
+  bottom: 0;
+  width: 4px;
+}
+
+.arcade-border.left { left: 0; }
+.arcade-border.right { right: 0; }
+
+@keyframes tekkenBorderGlow {
+  0% { opacity: 0.7; box-shadow: inset 0 0 20px var(--tekken-gold); }
+  100% { opacity: 1; box-shadow: inset 0 0 30px var(--tekken-red); }
+}
+
+.app-header {
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.game-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.2em;
+}
+
+.title-glow {
+  background: linear-gradient(45deg, var(--tekken-gold), var(--tekken-red), var(--tekken-blue));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px var(--tekken-gold);
+  animation: tekkenTitlePulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes tekkenTitlePulse {
+  0% { text-shadow: 0 0 30px var(--tekken-gold); }
+  100% { text-shadow: 0 0 50px var(--tekken-red), 0 0 70px var(--tekken-gold); }
+}
+
+.tagline {
+  font-size: 1.2rem;
+  color: var(--tekken-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  animation: tekkenFlicker 3s linear infinite;
+}
+
+@keyframes tekkenFlicker {
+  0%, 100% { opacity: 1; }
+  25% { opacity: 0.9; }
+  50% { opacity: 0.7; }
+  75% { opacity: 0.9; }
+}
+
+.sound-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: 2px solid var(--tekken-gold);
+  color: var(--tekken-gold);
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.sound-toggle:hover {
+  background: var(--tekken-gold);
+  color: var(--dark-bg);
+  box-shadow: 0 0 20px var(--tekken-gold);
+  transform: scale(1.1);
+}
+
+.app-main {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.setup-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.setup-section {
+  background: rgba(255, 215, 0, 0.05);
+  border: 2px solid var(--tekken-gold);
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+  backdrop-filter: blur(15px);
+  box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+.setup-section::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--tekken-gold), var(--tekken-red), var(--tekken-blue), var(--tekken-gold));
+  border-radius: 12px;
+  z-index: -1;
+  opacity: 0.3;
+  animation: tekkenBorderRotate 3s linear infinite;
+}
+
+@keyframes tekkenBorderRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--tekken-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.insert-coin-btn {
+  background: linear-gradient(45deg, var(--tekken-red), var(--tekken-gold));
+  border: none;
+  border-radius: 12px;
+  padding: 1.5rem 3rem;
+  font-family: 'Russo One', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--dark-bg);
+  cursor: pointer;
+  text-align: center;
+  margin: 2rem auto;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  transform: scale(1);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 4px 15px rgba(220, 20, 60, 0.4);
+}
+
+.insert-coin-btn:not(.disabled):hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px var(--tekken-red), 0 0 50px var(--tekken-gold);
+}
+
+.insert-coin-btn:not(.disabled):active {
+  transform: scale(0.95);
+}
+
+.insert-coin-btn.disabled {
+  background: #222;
+  color: #555;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.coin-text, .start-text {
+  display: block;
+  line-height: 1;
+}
+
+.coin-text {
+  font-size: 1.2rem;
+}
+
+.start-text {
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
+
+@media (max-width: 768px) {
+  .app-main {
+    padding: 1rem;
+  }
+  
+  .setup-section {
+    padding: 1.5rem;
+  }
+  
+  .game-title {
+    font-size: 3rem;
+  }
+  
+  .insert-coin-btn {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+}
