@@ -16,6 +16,7 @@ function App() {
   const [selectedVillain, setSelectedVillain] = useState<Avatar | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
 
+  
   useEffect(() => {
     const savedTasks = loadFromStorage('tasks');
     const savedBreakDuration = loadFromStorage('breakDuration');
